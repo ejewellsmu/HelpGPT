@@ -1,0 +1,19 @@
+# Virtual Environment
+venv/
+__pycache__/
+*.pyc
+
+# PDF directory
+pdf/
+
+# ChromaDB persistence directory
+docs/chroma/
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment variables
+.env 

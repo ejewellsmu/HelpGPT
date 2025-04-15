@@ -40,14 +40,14 @@ st.sidebar.title("Settings")
 llm_name = st.sidebar.selectbox("Model", ["llama3.2:1b","gemma3:1b","deepseek-r1:1.5b"])
 temperature = st.sidebar.slider("Temperature",0.0,1.0,0.5,0.01)
 st.sidebar.image("./pony.jpeg")
-st.title("Ask Perunas")
+st.title("HelpGPT")
 
 
 # Design the chatbot
 llm = ChatOllama(base_url="http://localhost:11434", model=llm_name, temperature=temperature)
 persist_directory = "./docs/chroma"
 oembeddings = OllamaEmbeddings(model="mxbai-embed-large:335m")
-system_message = SystemMessagePromptTemplate.from_template("You are a helpful AI Assistant. You explain things in short and brief. If you don't know or unsure about question, say I dont know")
+system_message = SystemMessagePromptTemplate.from_template("You are a helpful AI technical support assistant for a university. You provide answers to questions about the university's IT services and resources. If you are asked a question that you don't know the answer to, say I dont know. Do not hallucinate or make up false information.")
 
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=oembeddings)
 
@@ -77,16 +77,16 @@ qa_chain = RetrievalQA.from_chain_type(
     llm,
     retriever=vectordb.as_retriever()
 )
-qtext = st.chat_input("What do you want to ask from PDF?")
+qtext = st.chat_input("Ask HelpGPT a question...")
 
 if qtext:
-    st.write(f"**:adult: user**: {qtext}")
+    st.write(f"**:adult: User**: {qtext}")
     with st.spinner("Thinking..."):
         prompt = HumanMessagePromptTemplate.from_template(qtext)
         chat_history = get_history()
         chat_history.append(prompt)
         response = generate_response(qtext)
-        st.write(f"**:horse: peruna**: {response}")
+        st.write(f"**:horse: Peruna**: {response}")
         st.write("---")
         st.session_state['chat_history'].append({'user': qtext, 'assistant': response})
 

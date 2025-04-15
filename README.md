@@ -1,9 +1,26 @@
-# Chatbot
-This Git Repo contains source code for Ask Peruna chatbot created by Tue Vu - AI/ML Research Scientist at SMU.
-The repo is underdevelopment with:
-1. Original chatbot
-2. Chatbot with memory
-3. Chatbot RAG with uploaded document
-4. Chatbot RAG with uploaded document with memory
-5. Chatbot RAG with built-in database
-6. Chatbot with Youtube using Whisper transcript service
+# HelpGPT
+
+A Streamlit-based chatbot application that uses RAG to train the model on technical documentation for IT support purposes. The application uses Ollama for local LLM inference and ChromaDB for vector storage.
+
+## Quick Start
+
+1. Install dependencies:
+```bash
+cd 5.Chatbot_RAG
+./install.sh
+```
+
+2. Start Ollama:
+```bash
+ollama serve
+```
+
+3. Run the app:
+```bash
+source venv/bin/activate
+streamlit run Chat_RAG_final.py
+```
+
+## Credits
+
+Original implementation by Tue Vu - AI/ML Research Scientist at SMU
