@@ -3,11 +3,13 @@ venv/
 __pycache__/
 *.pyc
 
-# PDF directory
-pdf/
+# PDF directory contents
+pdf/*
+!pdf/pdfs go here
 
-# ChromaDB persistence directory
-docs/chroma/
+# ChromaDB persistence directory contents
+docs/chroma/*
+!docs/chroma/database goes here
 
 # IDE specific files
 .vscode/
