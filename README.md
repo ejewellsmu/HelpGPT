@@ -6,7 +6,7 @@ A Streamlit-based chatbot application that uses RAG to train the model on techni
 
 1. Install dependencies:
 ```bash
-cd 5.Chatbot_RAG
+cd Chatbot_RAG
 ./install.sh
 ```
 
