@@ -4,6 +4,8 @@ A Streamlit-based chatbot application that uses RAG to train the model on techni
 
 ## Quick Start
 
+0. Place PDF training documents in /pdf or an existing database in /docs
+
 1. Install dependencies:
 ```bash
 cd Chatbot_RAG
