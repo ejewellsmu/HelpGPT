@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Print header
 echo "============================================="
@@ -20,9 +20,6 @@ pip install --upgrade pip
 # Install dependencies
 echo "Installing dependencies..."
 pip install -r requirement.txt
-
-# Make script executable
-chmod +x install.sh
 
 echo "============================================="
 echo "Installation complete!"
