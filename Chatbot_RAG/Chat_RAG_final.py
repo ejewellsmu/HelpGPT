@@ -6,6 +6,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate,SystemMessagePromptTemplate, HumanMessagePromptTemplate, AIMessagePromptTemplate
+from langchain_community.document_loaders import TextLoader
 import streamlit as st
 import os
 import shutil
@@ -47,19 +48,21 @@ st.title("HelpGPT")
 llm = ChatOllama(base_url="http://localhost:11434", model=llm_name, temperature=temperature)
 persist_directory = "./docs/chroma"
 oembeddings = OllamaEmbeddings(model="mxbai-embed-large:335m")
-system_message = SystemMessagePromptTemplate.from_template("You are a helpful AI technical support assistant for a university. You provide answers to questions about the university's IT services and resources. If you are asked a question that you don't know the answer to, say I dont know. Do not hallucinate or make up false information.")
+system_message = SystemMessagePromptTemplate.from_template("You are an IT support agent for a university. Respond to users' questions about accounts, IT services, and resources in a professional, clear, and empathetic manner. Your responses should be concise, actionable, and easy to understand, suitable for use in email or chat with customers. Only use information from the provided knowledgebase. If you do not know the answer, say 'I don't know.' Do not make up information or speculate. If possible, cite the relevant article or section from the knowledgebase.")
 
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=oembeddings)
 
 update = st.sidebar.button("Update database!")
 if update:
     with st.spinner("Updating database..."):
-    # Load PDF
+    # Load PDF and TXT
         pdf_files = [f for f in os.listdir("./pdf/") if f.endswith(".pdf")]
+        txt_files = [f for f in os.listdir("./pdf/") if f.endswith(".txt")]
         pdf_loader = [PyPDFLoader("./pdf/"+i) for i in pdf_files]
+        txt_loader = [TextLoader("./pdf/"+i) for i in txt_files]
 
         docs = []
-        for loader in pdf_loader:
+        for loader in pdf_loader + txt_loader:
             docs.extend(loader.load())
 
         splits = split_text(docs)
